@@ -1,6 +1,13 @@
-import React from 'react';
-
+import React, { useState,  useEffect } from 'react';
+import allData from './data.json';
 const App = () => {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    if (data === null) {
+      setData(allData);
+    }
+  }, [data]);
+  console.log(data)
   return (
     <div className="App">
       <header className="App-header">
