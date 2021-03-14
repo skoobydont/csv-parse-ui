@@ -1,11 +1,9 @@
 import React, { useState,  useEffect } from 'react';
-import allData from './data.json';
+import allData from './example-data.json';
 const App = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
-    if (data === null) {
-      setData(allData);
-    }
+    if (data === null) setData(allData);
   }, [data]);
   console.log(data)
   return (
