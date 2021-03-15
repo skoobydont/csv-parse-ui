@@ -4,24 +4,21 @@ const App = () => {
   const [data, setData] = useState(null);
   useEffect(() => {
     if (data === null) setData(allData);
-  }, [data]);
+  }, []);
   console.log(data)
   return (
     <div className="App">
-      <header className="App-header">
-        <img className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <table>
+        <thead>
+          {Object.keys(data).map(key => <td>{key}</td>)}
+        </thead>
+        <tbody>
+          {Object.map(
+            obj => <tr>
+              {Object.values(obj).map(val => <td>{obj[val]}:{val}</td>)}
+              </tr>)}
+        </tbody>
+      </table>
     </div>
   );
 }
