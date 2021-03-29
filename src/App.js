@@ -1,32 +1,22 @@
-import React, { useState,  useEffect } from 'react';
-import allData from './example-data.json';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import LandingPage from './pages/LangingPage';
+import MonthPage from './pages/MonthPage';
+import YearPage from './pages/YearPage';
 const App = () => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    if (data === null) setData(allData.data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
-  console.log(data)
   return (
-    <div className="App">
-      {data === null
-      ? <div>Loading...</div>
-      : <table>
-          <thead>
-            <tr>
-              {Object.keys(data[0]).map(key => <td>{key}</td>)}
-            </tr>
-          </thead>
-          <tbody>
-            {data.map(
-              obj => <tr>
-                {Object.values(obj).map(val => <td>{obj[val]}:{val}</td>)}
-                </tr>)}
-          </tbody>
-        </table>
-      }
-    </div>
-  );
+    <Router>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/:year" component={YearPage} />
+        <Route exact path="/:year/:month" component={MonthPage} />
+      </Switch>
+    </Router>
+  )
 }
 
 export default App;
