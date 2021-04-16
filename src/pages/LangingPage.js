@@ -11,10 +11,8 @@ export default () => {
   const [data, setData] = useState(null);
   useEffect(() => {
     if (data === null) setData(allData);
-    console.log(Object.keys(allData))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
-  console.log(data)
   return (
     <>
       {data && Object.keys(allData).map(year => (
@@ -37,6 +35,6 @@ export default () => {
           </AccordionDetails>
         </Accordion>
       ))}
-      </>
+    </>
   )
 }
