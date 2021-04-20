@@ -17,7 +17,8 @@ export const filterOutDanglingQuote = value => {
  * @returns {string} month name
  */
 export const monthToText = (number, full = false) => {
-  switch (number) {
+  // might be stored as string so always type cast to number here
+  switch (+number) {
     case 1:
       return `${full ? 'January' : 'JAN'}`;
     case 2:
@@ -46,5 +47,42 @@ export const monthToText = (number, full = false) => {
       return null;
   }
 }
+
+const centSwitch = cents => {
+  switch (cents) {
+    case cents.length < 1:
+      return '00';
+    case cents.length === 1:
+      return `${cents}0`;
+    default:
+      return `${cents.substring(0,2)}`;
+  }
+};
+
+const dollarFormat = dollar => {
+  if (dollar.length > 3) {
+    let index = dollar.length - 1;
+    let result = [];
+    while (index >= 0) {
+      if (
+        (index !== (dollar.length - 1)) &&
+        (index - 1 % 3 === 0)) {
+        result.unshift(`,${dollar[index]}`)
+      } else {
+        result.unshift(dollar[index]);
+      }
+      index--;
+    }
+    return result.join('');
+  }
+  return dollar;
+};
+
+export const numberFormat = number => {
+  number += '';
+  const dollar = number.split('.')[0];
+  const cents = number.split('.')[1];
+  return `${dollarFormat(dollar)}.${!cents ? '00' : centSwitch(cents)}`;
+};
 
 export default filterOutDanglingQuote;
