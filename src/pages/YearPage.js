@@ -7,12 +7,12 @@ import {
   AccordionDetails,
   Typography,
 } from '@material-ui/core';
-import {
-  ExpandMoreIcon,
-} from '@material-ui/icons';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import allData from '../data.json';
 // util
 import { filterOutDanglingQuote, monthToText } from '../util/format';
+// custom
+import MonthlyStatsTable from '../components/MonthlyStatsTable';
 /**
  * Year Page. show some stats & enjoy some sleep. soon plz
  * @constant
@@ -56,10 +56,12 @@ const YearPage = () => {
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${month}-content`}
             id={`${month}-id`}>
-            {monthToText(month)}
+              {month} : {monthToText(month, true)}
           </AccordionSummary>
           <AccordionDetails>
             {/** TODO: map over each month & show various calculations */}
+            {/* {console.log(data[month])} */}
+            <MonthlyStatsTable monthlyTransactions={data[month]} />
           </AccordionDetails>
         </Accordion>
       ))}
