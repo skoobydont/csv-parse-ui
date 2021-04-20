@@ -33,7 +33,7 @@ const MonthlyStatsTable = props => {
       .reduce((p, c) => p + c)
   );
   // console.log(`${monthName} ${totalAbsoluteDebitValue(monthlyTransactions)}`);
-  return (
+  return monthlyTransactions.length > 0 ? (
     <table>
       <thead>
         <tr>
@@ -71,7 +71,7 @@ const MonthlyStatsTable = props => {
         </tr>
       </tbody>
     </table>
-  );
+  ) : null;
 };
 
 MonthlyStatsTable.propTypes = {
